@@ -1,5 +1,5 @@
 window.onload = function() {
-    const  searchInput = document.getElementById('movieSearch');
+    const searchInput = document.getElementById('movieSearch');
     const statusDisplay= document.getElementById('searchStatus');
 
 
@@ -10,9 +10,7 @@ window.onload = function() {
             statusDisplay.style.color ="#f5c518";
         } else {
             statusDisplay.innerText = "Awaiting input...";
-            statusDisplay.style.color = "fffff";
+            statusDisplay.style.color = "#ffffff";
         }
-
     };
-
 };
