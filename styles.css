@@ -2,6 +2,46 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:15px;
+    padding:10px 5%;
     background-color: #141414f8
+}
+
+
+.search_bar{
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px; /*modern rounded look*/
+    padding: 5px 15px;
+    border: 1px solid #333;
+    width: 50%;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.search_bar:hover {
+    border-color: #f5c518;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search_bar input{
+    background-color: transparent;
+    border: none;
+    color: #ffffff; 
+    flex: 1;
+    outline: none;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.search_bar input::placeholder{
+    color: #999
+}
+
+.searchIconButton{
+    background: none;
+    border: none;
+    color: #f5c518;
+    cursor: pointer;
+    display: flex;
+    padding-left: 10px;
 }
