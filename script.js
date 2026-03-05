@@ -31,14 +31,48 @@ window.onload = function() {
                 <p class="imdbRating">${rating}</p>
                 <p>Prepare to enjoy one of the best trending movies of today ${title} </p>
                 
-                
-                <a href= "${trailerLink}" target="_blank" class="trailerBtn">Watch Trailer</a>
+                <div style="display: flex; gap; 10px; justify-content: center;">
+                    <a href= "${trailerLink}" target="_blank" class="trailerBtn">Watch Trailer</a>
+                    <button id="addToWatchlist" class="trailerBtn" style="background-color: #333; #DBA506; border: 1px solid #DBA506;">
+                      + Watchlist
+                    </button>
+                </div>
 
                 
+            `;
+
+
+
+            document.getElementById('addToWatchlist').addEventListener('click', () => {
+                addToWatchlist(title);
+            });
+
+
+            modal.style.display = "flex";
+        });
+    });
+
+
+
+    document.querySelectorAll('.celebCard').forEach(celeb => {
+        celeb.addEventListener('click', () => {
+            const name = celeb.querySelector('.celebName').innerText;
+            const rank = celeb.querySelector('.celebRank').innerText;
+
+            document.getElementById('modalDetails').innerHTML = `
+                <h1 style="color: #DBA506">${name}</h1>
+                <p style="color: #999;">IMDb Star Rank: ${rank}</p>
+                <p> This celebrity is currently trending in the top rankings this month!</p>
             `;
             modal.style.display = "flex";
         });
     });
+
+
+
+
+
+
 
     closeBtn.onclick = () => modal.style.display = "none";
 
@@ -114,3 +148,22 @@ window.onload = function() {
 
 
 };
+
+function addToWatchlist(movieTitle) {
+    let watchlist = JSON.parse(localStorage.getItem('myWatchlist')) || [];
+
+    if(!watchlist.includes(movieTitle)) {
+        watchlist.push(movieTitle);
+        localStorage.setItem('myWatchlist', JSON.stringify(watchlist));
+        alert(`${movieTitle} added to your watchlist.`);
+    } else {
+        alert(`${movieTitle} is already in your watchlist.`);
+    }
+}
+
+
+function getWatchlist() {
+    const list = JSON.parse(localStorage.getItem('myWatchlist'));
+    console.log("Current Watchlist:", list);
+    return list;
+}
