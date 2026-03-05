@@ -181,3 +181,20 @@ body{
     cursor: pointer;
     color: #DBA506;
 }
+
+.trailerBtn {
+    display: inline-block;
+    background-color: #DBA506;
+    color: black;
+    padding: 12px 20px;
+    margin-top: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.trailerBtn:hover {
+    background-color: #dabc65;
+    transform: scale(1.02);
+}

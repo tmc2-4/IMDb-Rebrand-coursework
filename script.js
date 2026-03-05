@@ -32,7 +32,7 @@ window.onload = function() {
                 <p>Prepare to enjoy one of the best trending movies of today ${title} </p>
                 
                 
-                <a href= "${trailerLink}" target="_blank" class="trailerBtn">Watch Trailer</a>";
+                <a href= "${trailerLink}" target="_blank" class="trailerBtn">Watch Trailer</a>
 
                 
             `;
