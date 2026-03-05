@@ -53,3 +53,93 @@ body{
     color: white;
 }
 
+.cinamaticContainer {
+    position: relative;
+    height: 50vh;
+    background: radial-gradient(circle at 20%, #1a1a1a 0%, #000000 100%);
+    display: flex;
+    overflow: hidden;
+}
+
+.cinamaticCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.cinamaticOverlay{
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.cinamaticContentWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding:  0 5%;
+}
+
+.cinamaticImage img {
+    height: 500px;
+    filter: drop-shadow(0 0 30px rgba(0,0,0,0.7));
+    pointer-events:none
+}
+
+.imdbRating{
+    color: #DBA506;
+    font-weight: bold;
+}
+
+.trendingNow{
+    padding: 40px 5%;
+}
+
+.sectionTitle{
+    font-size: 1.5rem;
+    color: #DBA506;
+    margin-bottom: 20px;
+}
+
+.movieGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.movieCard{
+    background: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.movieCard img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.cardInfo{
+    padding: 15px;
+}
+
+.cardInfo p {
+    color: #DBA506;
+    font-weight: bold;
+    margin: 0;
+}
+
+.cardInfo h3 {
+    font-size: 1rem;
+    margin: 5px 0 0;
+}
