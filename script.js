@@ -14,6 +14,47 @@ window.onload = function() {
         }
     };
 
+
+
+    const modal = document.getElementById("movieModal");
+    const closeBtn = document.querySelector(".closeModal");
+
+    document.querySelectorAll('.movieCard').forEach(card => {
+        card.addEventListener('click', () => {
+            const title = card.querySelector('h3').innerText;
+            const rating = card.querySelector('p').innerText;
+            
+            const trailerLink = `https://www.youtube.com/results?search_query=${title}+trailer`;
+
+            document.getElementById('modalDetails').innerHTML = `
+                <h1 style="color: #DBA506">${title}</h1>
+                <p class="imdbRating">${rating}</p>
+                <p>Prepare to enjoy one of the best trending movies of today ${title} </p>
+                
+                
+                <a href= "${trailerLink}" target="_blank" class="trailerBtn">Watch Trailer</a>";
+
+                
+            `;
+            modal.style.display = "flex";
+        });
+    });
+
+    closeBtn.onclick = () => modal.style.display = "none";
+
+    window.onclick = (event) => {
+        if (event.target == modal) modal.style.display = "none";
+
+    };
+
+
+
+
+
+
+
+
+
     const canvas = this.document.getElementById('cinamatic-canvas');
     const ctx = canvas.getContext('2d')
     let particlesArray = [];
