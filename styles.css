@@ -55,7 +55,7 @@ body{
 
 .cinamaticContainer {
     position: relative;
-    height: 50vh;
+    height: 70vh;
     background: radial-gradient(circle at 20%, #1a1a1a 0%, #000000 100%);
     display: flex;
     overflow: hidden;
@@ -88,9 +88,11 @@ body{
 }
 
 .cinamaticImage img {
-    height: 500px;
+    height: 480px;
+    width: auto;
     filter: drop-shadow(0 0 30px rgba(0,0,0,0.7));
-    pointer-events:none
+    pointer-events:none;
+    border-radius: 8px;
 }
 
 .imdbRating{
@@ -143,3 +145,4 @@ body{
     font-size: 1rem;
     margin: 5px 0 0;
 }
+
