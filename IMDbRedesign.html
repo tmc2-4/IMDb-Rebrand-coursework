@@ -40,13 +40,13 @@
             <div class="cinamaticContentWrapper">
                 <div class="cinamaticText">
                 <span class="imdbRating">★9.5</span>
-                <h1>Superman</h1>
+                <h1>Movie</h1>
                 <p>The new look of the worlds greatest hero.</p>
                 <button class="btn_play">Watch Now</button>
             </div>
 
             <div class="cinamaticImage">
-                <img src="superman.jpg" alt= "superman">
+                <img src="movieimg.jpg" alt= "moviePoster">
             </div>
         </div>
     </div>
@@ -86,11 +86,14 @@
             </div>
         </section>
 
-        <section class="watchlistSection">
-            <h2 class="sectionTitle">My Watchlist</h2>
-            <div class="watchlistContainer">
-                <ul id="watchlistItems"></ul>
+        <section class="watchlistSection" style="padding: 40px;">
+            <div class="sectionHeader">
+                <div style="width: 4px; height: 28px; background-color: #f5c518; border-radius: 2px;"></div>
+                <h2>My Watchlist</h2>
             </div>
+            <div id="watchlistItems" class="movieRow">
+                </div>
+       
         </section>
 
         <section class ="celebSection">
@@ -150,6 +153,45 @@
             </div>
         </section>
 
+        <section class="genreSection">
+            <h2 class="sectionTitle">Browse by Genre</h2>
+            <div class="genreGrid">
+                <div class="genreChose">Action</div>
+                <div class="genreChose">Sci-Fi</div>
+                <div class="genreChose">Horror</div>
+                <div class="genreChose">Romance</div>
+                <div class="genreChose">Animation</div>
+                <div class="genreChose">Documentry</div>
+                <div class="genreChose">Comedy</div>
+            </div>
+        </section>
+
+        <section class="newsSection">
+            <h2 class="sectionTitle">Editors Picks & News</h2>
+            <div class="newsGrid">
+                <div class="newsCard">
+                    <div class="newsImageContainer">
+                        <img class="img.jpg" alt="...news" class="newsImage">
+                        <div class="NewsOverlay">
+                            <span class="newsTag">Exclusive</span>
+                            <h3>......</h3>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="newsCard">
+                    <div class="newsImageContainer">
+                       <img class="img.jpg" alt="...news" class="newsImage">
+                        <div class="NewsOverlay">
+                            <span class="newsTag">Interview</span>
+                            <h3>....</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <div id="movieModal" class="modal">
@@ -159,8 +201,36 @@
         </div>
     </div>
 
-
-
-    
 </body>
+<footer class="pageFooter">
+    <div class="footerContent">
+        <div class="footerLogo">
+            <img src="imdb"alt="Logo" width="80">
+        </div>
+        <div class="footerLinks">
+            <div class="footerInfo">
+                <h4>Press Room</h4>
+                <a href="#">Advertising</a>
+                <a href="#">Jobs</a>
+                <a href="#">Conditions of Use</a>
+            </div>
+            <div class="footerInfo">
+                <h4>Help</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Contributor Zone</a>
+                <a href="#">Polls</a>
+            </div>
+        </div>
+        <div class="footerMedia">
+            <p>Follow IMDb on social media</p>
+            <div class="mediaIcons">
+                <span>f</span> <span>ig</span> <span>x</span> <span>yt</span>
+            </div>
+        </div>
+    </div>
+    <div class="footerEnd">
+        <p>&copy; 1990-2024 by IMDb.com, Inc. Redesign Concept</p>
+    </div>
+</footer>
+
 </html>

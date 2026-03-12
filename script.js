@@ -33,20 +33,18 @@ window.onload = function() {
                 
                 <div style="display: flex; gap; 10px; justify-content: center;">
                     <a href= "${trailerLink}" target="_blank" class="trailerBtn">Watch Trailer</a>
-                    <button id="addToWatchlist" class="trailerBtn" style="background-color: #333; #DBA506; border: 1px solid #DBA506;">
-                      + Watchlist
+                    <button id="modalWatchListBtn" class="trailerBtn" style="background-color: #DBA506; border: 1px solid #DBA506;">
+                        + Watchlist
                     </button>
                 </div>
-
-                
             `;
 
-
-
-            document.getElementById('addToWatchlist').addEventListener('click', () => {
-                addToWatchlist(title);
+            const watchlistBtn = document.getElementById('modalWatchListBtn');
+            watchlistBtn.addEventListener('click', () => {
+                addToWatchlist(title, watchlistBtn);
             });
 
+    
 
             modal.style.display = "flex";
         });
@@ -78,6 +76,8 @@ window.onload = function() {
 
     window.onclick = (event) => {
         if (event.target == modal) modal.style.display = "none";
+
+    renderWatchlist();
 
     };
 
@@ -146,24 +146,69 @@ window.onload = function() {
     init();
     animate();
 
+    renderWatchlist();
+
 
 };
 
-function addToWatchlist(movieTitle) {
+function addToWatchlist(movieTitle, btn) {
     let watchlist = JSON.parse(localStorage.getItem('myWatchlist')) || [];
 
     if(!watchlist.includes(movieTitle)) {
         watchlist.push(movieTitle);
         localStorage.setItem('myWatchlist', JSON.stringify(watchlist));
-        alert(`${movieTitle} added to your watchlist.`);
+
+        btn.innerText = "Added";
+        btn.style.backgroundColor = "#4caf50"
+        btn.classList.add("addedSuccess");
+        btn.style.color = "white";
+
+        renderWatchlist();
     } else {
-        alert(`${movieTitle} is already in your watchlist.`);
+        alert(`${movieTitle} is aleady in your watchlist.` );
+
+
     }
 }
 
+function removeFromWatchlist(movieTitle) {
+    let watchlist = JSON.parse(localStorage.getItem('myWatchlist'))  || [];
 
-function getWatchlist() {
-    const list = JSON.parse(localStorage.getItem('myWatchlist'));
-    console.log("Current Watchlist:", list);
-    return list;
+    watchlist = watchlist.filter(title => title !== movieTitle);
+
+    localStorage.setItem('myWatchlist', JSON.stringify(watchlist));
+
+    renderWatchlist();
 }
+        
+function renderWatchlist() {
+    const listElement = document.getElementById('watchlistItems');
+    if (!listElement) return;
+
+    let watchlist = JSON.parse(localStorage.getItem('myWatchlist')) || [];
+    listElement.innerHTML ='';
+
+    if (watchlist.length === 0) {
+        listElement.innerHTML = '<p style=color: #999; padding: 20px;">Your watch list is empty.</p>';
+        return;
+    }
+
+    watchlist.forEach(movieTitle => {
+        const item = document.createElement('div');
+        item.className = 'watchlist-item';
+        item.innerHTML = `
+        <h3>${movieTitle}</h3> 
+        <button onclick="removeFromWatchlist('${movieTitle}')" style= "background: none; border: 1px solid #DBA506; cursor: pointer; margin-top: 10px;">Remove</button>
+    `;
+    listElement.appendChild(item);
+    });
+    
+}
+
+function removeFromWatchlist(title) {
+    let watchlist = JSON.parse(localStorage.getItem('myWatchlist')) || [];
+    watchlist = watchlist.filter(m => m !== movieTitle);
+    localStorage.setItem('myWatchlist', JSON.stringify(watchlist));
+    renderWatchlist();
+}
+

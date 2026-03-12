@@ -3,7 +3,13 @@
     justify-content: space-between;
     align-items: center;
     padding:10px 5%;
-    background-color: #121212
+    background-color: #121212;
+    z-index: 10;
+}
+
+main{
+    position: relative;
+    z-index: 5;
 }
 
 
@@ -61,6 +67,18 @@ body{
     overflow: hidden;
 }
 
+.cinamaticContainer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #000);
+    z-index: 6;
+    pointer-events: none;
+}
+
 .cinamaticCanvas {
     position: absolute;
     top: 0;
@@ -68,6 +86,7 @@ body{
     z-index: 1;
     width: 100%;
     height: 100%;
+    pointer-events: none;
 }
 
 .cinamaticOverlay{
@@ -123,7 +142,14 @@ body{
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     border: 1px solid #333;
+    z-index: 10;
 }
+
+.movieCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(179, 143, 38, 0.3);
+}
+
 
 .movieCard img {
     width: 100%;
@@ -158,6 +184,7 @@ body{
     backdrop-filter: blur(3px);
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .modalContent{
@@ -261,6 +288,163 @@ body{
 #addToWatchlist:hover {
     background-color: #444;
     transform: scale(1);
+    cursor: pointer;
+}
+
+.addedSuccess{
+    background-color: #2aa346;
+    color: white;
+    pointer-events: none;
+}
+
+.watchlistSection {
+    padding: 40px 5%;
+}
+
+#watchlistitems {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+#watchlistitems li {
+    background: #1a1a1a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #DBA506;
+    border: 1px solid #333;
+}
+
+.genreSection {
+    padding: 40px 5%;
+}
+
+.genreGrid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.genreChose {
+    padding: 10px 25px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.genreChose:hover{
+    background-color: #2a2a2a;
+    border-color: #DBA506;
+    color: #DBA506;
+    transform: translateY(-2px);
+}
+
+.newsSection{
+    padding: 40px 5%;
+    margin-bottom: 45px;
+}
+
+.newsGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.newsCard {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    height: 300px;
+}
+
+.newsImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.newsCard:hover .newsImage {
+    transition: scale(1.5);
+}
+
+.newsOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    color: white;
+}
+
+.newsOverlay h3 {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    line-height: 1.5;
 }
 
 
+.newsTag {
+    color: #DBA506;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.pageFooter {
+    background-color: #000;
+    padding: 60px 5% 25px;
+    border-top: 1px solid #333;
+    margin-top: 65px;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 45px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footerLinks {
+    display: flex;
+    gap: 80px;
+}
+
+.footerInfo h4 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.footerInfo a {
+    display: block;
+    color: #999;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.footerInfo a:hover {
+    color: #DBA506;
+}
+
+.footerEnd{
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    color: #565656;
+    font-size: 1rem;
+}
