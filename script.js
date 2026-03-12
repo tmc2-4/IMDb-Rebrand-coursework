@@ -196,19 +196,15 @@ function renderWatchlist() {
     watchlist.forEach(movieTitle => {
         const item = document.createElement('div');
         item.className = 'watchlist-item';
+
         item.innerHTML = `
         <h3>${movieTitle}</h3> 
-        <button onclick="removeFromWatchlist('${movieTitle}')" style= "background: none; border: 1px solid #DBA506; cursor: pointer; margin-top: 10px;">Remove</button>
+        <button onclick="removeFromWatchlist('${movieTitle}')" class="remove-btn">Remove</button>
+        
     `;
     listElement.appendChild(item);
     });
     
 }
 
-function removeFromWatchlist(title) {
-    let watchlist = JSON.parse(localStorage.getItem('myWatchlist')) || [];
-    watchlist = watchlist.filter(m => m !== movieTitle);
-    localStorage.setItem('myWatchlist', JSON.stringify(watchlist));
-    renderWatchlist();
-}
 

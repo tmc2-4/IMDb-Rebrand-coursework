@@ -114,6 +114,27 @@ body{
     border-radius: 8px;
 }
 
+.btn_play{
+    background-color: #DBA506;
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn_play:hover{
+    background-color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(219, 165, 6, 0.4);
+}
+
+
+
 .imdbRating{
     color: #DBA506;
     font-weight: bold;
@@ -246,10 +267,30 @@ body{
 }
 
 .celebCard {
-    flex: 0 0 auto;
-    width: 135px;
-    text-align: center;
+    flex: 0 0 250px;
+    width: 250px;
+    padding: 20px;
+    position: relative;
+    transition: transform 0.3 ease, box-shadow 0.3 ease;
+    background: #1a1a1a;
     cursor: pointer;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.celebCard:hover {
+    transform: scale(1.05);
+    border-color: #DBA506;
+    box-shadow: 0 10px 20px rgba(219,165,6,0.5);
+    z-index: 5;
+}
+
+.celebContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 5%;
 }
 
 .celebImage{
@@ -271,6 +312,9 @@ body{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: #DBA506;
 }
 
 .celebName{
@@ -301,21 +345,7 @@ body{
     padding: 40px 5%;
 }
 
-#watchlistitems {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
 
-#watchlistitems li {
-    background: #1a1a1a;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: #DBA506;
-    border: 1px solid #333;
-}
 
 .genreSection {
     padding: 40px 5%;
@@ -447,4 +477,35 @@ body{
     border-top: 1px solid #222;
     color: #565656;
     font-size: 1rem;
+}
+
+.watchlist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    border-left: 3px solid #DBA506;
+}
+
+.watchlist-item button {
+    background: none;
+    border: 1px solid #ff3e3e;
+    color: #ff3e3e;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.watchlist-item button:hover{
+    background: #ff3e3e;
+    color: white;
+}
+
+.addedSuccess {
+    pointer-events: none;
 }
