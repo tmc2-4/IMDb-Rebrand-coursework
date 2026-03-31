@@ -83,12 +83,6 @@ window.onload = function() {
 
 
 
-
-
-
-
-
-
     const canvas = this.document.getElementById('cinamatic-canvas');
     const ctx = canvas.getContext('2d')
     let particlesArray = [];
