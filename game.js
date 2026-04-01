@@ -44,7 +44,6 @@ layer.add(player, popcorn, scoreText);
 
 const anim = new Konva.Animation((frame) => {
     velocityY += gravity;
-
     popcorn.y(popcorn.y() + velocityY);
 
     const mousePos = stage.getPointerPosition();
@@ -54,7 +53,8 @@ const anim = new Konva.Animation((frame) => {
 
     if (Konva.Util.haveIntersection(popcorn.getClientRect(), player.getClientRect())) {
         score++;
-        console.log("Score:" + score);
+        scoreText.text('Score: ' + score);
+        layer.batchDraw();
         resetPopcorn();
     }
 
