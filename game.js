@@ -1,7 +1,7 @@
 const stage = new Konva.Stage({
     container: 'gameContainer',
-    width: 800,
-    height: 600
+    width: 600,
+    height: 400
 });
 
 const layer = new Konva.Layer();
@@ -14,8 +14,8 @@ let score = 0;
 
 
 const player = new Konva.Rect({
-    x: 350,
-    y: 550,
+    x: 250,
+    y: 370,
     width: 100,
     height: 20,
     fill: '#DBA506',

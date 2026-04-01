@@ -566,13 +566,14 @@ body{
 }
 
 #gameContainer{
-    width: 800px;
-    height: 600px;
+    width: 600px;
+    height: 400px;
     margin: 0 auto;
     background: #000;
     border: 3px solid #DBA506;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     overflow: hidden;
-    cursor: crosshair;
+    cursor: default !important;
+    touch-action: none;
 }
