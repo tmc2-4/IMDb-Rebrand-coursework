@@ -550,3 +550,29 @@ body{
 .addedSuccess {
     pointer-events: none;
 }
+
+.gameArea{
+    padding: 60px 20px;
+    background-color: #121212;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+.gameArea h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#gameContainer{
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    background: #000;
+    border: 3px solid #DBA506;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+    cursor: crosshair;
+}
