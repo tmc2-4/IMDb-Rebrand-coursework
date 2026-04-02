@@ -577,3 +577,7 @@ body{
     cursor: default !important;
     touch-action: none;
 }
+
+#gameContainer canvas{
+    cursor: pointer !important;
+}
