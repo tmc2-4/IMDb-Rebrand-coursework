@@ -15,23 +15,38 @@ let velocityY = 1;
 const gravity = 0.15;
 let gameActive = false;
 
+const bucketIMG = new Image ();
+bucketIMG.src = 'bucket.png';
 
-const player = new Konva.Rect({
-    x: 250,
-    y: 370,
-    width: 100,
-    height: 20,
-    fill: '#DBA506',
-    cornerRadius: 5
+
+const popcornIMG = new Image ();
+popcornIMG.src = 'popcorn.png';
+
+let imagesLoaded = 0;
+[bucketIMG, popcornIMG].forEach(img => {
+    img.onload = () => {
+        imagesLoaded++;
+        if (imagesLoaded === 2) layer.draw();
+    };
 });
 
-const popcorn = new Konva.Circle({
+
+const player = new Konva.Image({
+    x: 250,
+    y: 330,
+    image: bucketIMG,
+    width: 100,
+    height: 50,
+    offsetX: 50,
+    offsetY: 25
+});
+
+const popcorn = new Konva.Image({
     x: Math.random() * stage.width(), 
     y: -50,
-    radius: 15,
-    fill: '#ffffff',
-    stroke: '#333',
-    strokeWidth: 2
+    image: popcornIMG,
+    width: 40,
+    height:40
 });
 
 const scoreText = new Konva.Text({
@@ -65,7 +80,6 @@ const messageText = new Konva.Text({
 
 layer.add(player, popcorn, scoreText, livesText, messageText);
 
-funct
 
 function resetPopcorn() {
     popcorn.y(-50);
@@ -129,4 +143,4 @@ stage.on('click tap', () => {
     }
 });
 
-layer.draw();
+layer.draw()
