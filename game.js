@@ -1,3 +1,11 @@
+const popcornImg = new Image();
+popcornImg.src = 'popcorn.png';
+
+const bucketImg = new Image();
+bucketImg.src = 'bucket.png';
+
+bucketImg.onload = () => gameLayer.draw();
+popcornImg.onload = () => gameLayer.draw();
 
 const stage = new Konva.Stage({
     container: 'gameContainer',
@@ -5,142 +13,135 @@ const stage = new Konva.Stage({
     height: 400
 });
 
-const layer = new Konva.Layer();
-stage.add(layer);
-
+const gameLayer = new Konva.Layer();
+stage.add(gameLayer);
 
 let score = 0;
 let lives = 3;
+let gravity = 0.08;
 let velocityY = 1;
-const gravity = 0.15;
-let gameActive = false;
+let gameRunning = false;
 
-const bucketIMG = new Image ();
-bucketIMG.src = 'bucket.png';
-
-
-const popcornIMG = new Image ();
-popcornIMG.src = 'popcorn.png';
-
-let imagesLoaded = 0;
-[bucketIMG, popcornIMG].forEach(img => {
-    img.onload = () => {
-        imagesLoaded++;
-        if (imagesLoaded === 2) layer.draw();
-    };
+const scoreLabel = new Konva.Text({
+    x: 20,
+    y: 20,
+    text: 'Popcorn: 0',
+    fontSize: 20,
+    fontFamily: 'Arial',
+    fill: '#DBA506'
 });
 
+const livesLabel = new Konva.Text({
+    x: stage.width() - 100,
+    y: 20,
+    text: 'Lives: 3',
+    fontSize: 18,
+    fontFamily: 'Arial',
+    fill: '#ff3e3e'
+});
+
+const startText = new Konva.Text({
+    x: stage.width() / 2 - 100,
+    y: stage.height() / 2 - 20,
+    text: 'CLICK TO START',
+    fontSize: 25,
+    fontFamily: 'Arial', 
+    fill: '#DBA506',
+    fontStyle: 'bold'
+});
+
+const gameOverText = new Konva.Text({
+    x: stage.width() / 2 - 80,
+    y: stage.height() / 2 - 20,
+    text: 'GAME OVER',
+    fontSize: 30,
+    fontFamily: 'Arial',
+    fill: 'white',
+    visible: false
+});
+
+gameLayer.add(scoreLabel, livesLabel, startText, gameOverText);
 
 const player = new Konva.Image({
     x: 250,
-    y: 330,
-    image: bucketIMG,
-    width: 100,
-    height: 50,
-    offsetX: 50,
-    offsetY: 25
+    y: 340,
+    image: bucketImg,
+    width: 80,
+    height: 60,
+    visible: false
 });
 
-const popcorn = new Konva.Image({
-    x: Math.random() * stage.width(), 
+const item = new Konva.Image({
+    x: Math.random() * stage.width(),
     y: -50,
-    image: popcornIMG,
+    image: popcornImg,
     width: 40,
-    height:40
+    height: 40,
+    visible: false   
 });
 
-const scoreText = new Konva.Text({
-    x: 20,
-    y: 20,
-    text: 'Score: 0',
-    fontSize: 24,
-    fontFamily: 'Arial',
-    fill: '#DBA506',
-});
+gameLayer.add(player, item);
 
-const livesText = new Konva.Text({
-    x: stage.width() - 120,
-    y: 20,
-    text: 'Lives: 3',
-    fontSize: 24,
-    fontFamily: 'Arial',
-    fill: '#cd0606',
-});
-
-const messageText = new Konva.Text({
-    x: 0,
-    y: stage.height() / 2 - 20,
-    width: stage.width(),
-    text: 'CLICK TO START',
-    fontSize: 30,
-    fontFamily: 'Arial',
-    fill: '#FFF',
-    align: 'center'
-});
-
-layer.add(player, popcorn, scoreText, livesText, messageText);
-
-
-function resetPopcorn() {
-    popcorn.y(-50);
-    popcorn.x(Math.random() * stage.width());
-    velocityY = 2;
+function resetItem() {
+    item.y(-50);
+    item.x(Math.random() * (stage.width() - 40) + 20);
+    velocityY = Math.random() * 1.0 + 0.5;
+    gravity = Math.random() * 0.1 + 0.05;
 }
 
 function startGame() {
     score = 0;
     lives = 3;
-    gameActive = true;
-    messageText.visible(false);
-    scoreText.text('Score: 0');
-    livesText.text('Lives: 3');
-    resetPopcorn();
+    scoreLabel.text("Popcorn: 0");
+    livesLabel.text("Lives: 3");
+
+    startText.visible(false);
+    gameOverText.visible(false);
+    player.visible(true);
+    item.visible(true);
+
+    resetItem();
     anim.start();
+    gameRunning = true;
 }
 
-function gameOver() {
-    gameActive = false;
-    anim.stop();
-    messageText.text('GAME OVER\nClick to Try Again');
-    messageText.visible(true);
-    layer.draw();
-}
-
+stage.on('click tap', () => {
+    if (!gameRunning) {
+        startGame();
+    }
+});
 
 const anim = new Konva.Animation((frame) => {
-    if (!gameActive) return false;
-
     velocityY += gravity;
-    popcorn.y(popcorn.y() + velocityY);
-
+    item.y(item.y() + velocityY); 
+    
     const mousePos = stage.getPointerPosition();
     if (mousePos) {
         player.x(mousePos.x - player.width() / 2);
     }
 
-    if (Konva.Util.haveIntersection(popcorn.getClientRect(), player.getClientRect())) {
+    const itemRect = item.getClientRect();
+    const playerRect = player.getClientRect();
+    
+    if (Konva.Util.haveIntersection(itemRect, playerRect)) {
         score++;
-        scoreText.text('Score: ' + score);
-        resetPopcorn();
+        scoreLabel.text("Popcorn: " + score);
+        resetItem();
     }
 
-    if (popcorn.y() > stage.height()) {
+    if (item.y() > stage.height()) {
         lives--;
-        livesText.text('Lives: ' + lives);
+        livesLabel.text("Lives: " + lives);
 
-        if (lives <= 0) {
-            gameOver();
+        if (lives <= 0){
+            anim.stop();
+            gameOverText.visible(true);
+            item.visible(false);
+            gameRunning = false;
         } else {
-            resetPopcorn();
+            resetItem();
         }
     }
-}, layer);
+}, gameLayer);
 
-
-stage.on('click tap', () => {
-    if (!gameActive) {
-        startGame();
-    }
-});
-
-layer.draw()
+gameLayer.draw();
