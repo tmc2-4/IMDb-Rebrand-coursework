@@ -103,6 +103,8 @@ function resetItem() {
 function startGame() {
     score = 0;
     lives = 3;
+    gravity = 0.08;
+    velocityY = 1;
     scoreLabel.text("Popcorn: 0");
     livesLabel.text("Lives: 3");
 
@@ -148,6 +150,8 @@ const anim = new Konva.Animation((frame) => {
     if (Konva.Util.haveIntersection(itemRect, playerRect)) {
         score++;
         scoreLabel.text("Popcorn: " + score);
+        gravity += 0.005;
+        velocityY += 0.2;
         resetItem();
     }
 
