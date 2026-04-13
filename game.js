@@ -22,6 +22,8 @@ let gravity = 0.08;
 let velocityY = 1;
 let gameRunning = false;
 
+let highScore = localStorage.getItem('popcornBest') || 0;
+
 const scoreLabel = new Konva.Text({
     x: 20,
     y: 20,
@@ -29,6 +31,15 @@ const scoreLabel = new Konva.Text({
     fontSize: 20,
     fontFamily: 'Arial',
     fill: '#DBA506'
+});
+
+const highScoreLabel = new Konva.Text({
+    x: 20,
+    y: 45,
+    text: 'Best: ' + highScore,
+    fontSize: 16,
+    fontFamily: 'Arial',
+    fill: '#eacb6d'
 });
 
 const livesLabel = new Konva.Text({
@@ -60,7 +71,7 @@ const gameOverText = new Konva.Text({
     visible: false
 });
 
-gameLayer.add(scoreLabel, livesLabel, startText, gameOverText);
+gameLayer.add(scoreLabel, highScoreLabel, livesLabel, startText, gameOverText);
 
 const player = new Konva.Image({
     x: 250,
@@ -114,6 +125,17 @@ stage.on('click tap', () => {
 const anim = new Konva.Animation((frame) => {
     velocityY += gravity;
     item.y(item.y() + velocityY); 
+
+    const amplitude = 2;
+    const frequency = 0.005;
+
+    item.x(item.x() + Math.sin(frame.time * frequency) * amplitude);
+
+    if (item.x() < 0) {
+        item.x(0);
+    } else if (item.x() > stage.width() - item.width()) {
+        item.x(stage.width() - item.width());
+    }
     
     const mousePos = stage.getPointerPosition();
     if (mousePos) {
@@ -138,6 +160,12 @@ const anim = new Konva.Animation((frame) => {
             gameOverText.visible(true);
             item.visible(false);
             gameRunning = false;
+
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('popcornBest', highScore);
+                highScoreLabel.text("Best: " + highScore);
+            }
         } else {
             resetItem();
         }
