@@ -20,6 +20,7 @@ let score = 0;
 let lives = 3;
 let gravity = 0.08;
 let velocityY = 1;
+let velocityX= 0
 let gameRunning = false;
 
 let highScore = localStorage.getItem('popcornBest') || 0;
@@ -97,6 +98,7 @@ function resetItem() {
     item.y(-50);
     item.x(Math.random() * (stage.width() - 40) + 20);
     velocityY = Math.random() * 1.0 + 0.5;
+    velocityX = 0;
     gravity = Math.random() * 0.1 + 0.05;
 }
 
@@ -128,10 +130,9 @@ const anim = new Konva.Animation((frame) => {
     velocityY += gravity;
     item.y(item.y() + velocityY); 
 
-    const amplitude = 2;
-    const frequency = 0.005;
-
-    item.x(item.x() + Math.sin(frame.time * frequency) * amplitude);
+    velocityX *= 0.99;
+    velocityX += (Math.random() - 0.5) * 0.2;
+    item.x(item.x() + velocityX)
 
     if (item.x() < 0) {
         item.x(0);
@@ -155,11 +156,12 @@ const anim = new Konva.Animation((frame) => {
         resetItem();
     }
 
-    if (item.y() > stage.height()) {
+    if (item.y() + item.height() > stage.height()) {
+        
         lives--;
         livesLabel.text("Lives: " + lives);
-
-        if (lives <= 0){
+            
+        if (lives <= 0) {
             anim.stop();
             gameOverText.visible(true);
             item.visible(false);
@@ -174,6 +176,11 @@ const anim = new Konva.Animation((frame) => {
             resetItem();
         }
     }
+    
+
+
+
+            
 }, gameLayer);
 
 gameLayer.draw();

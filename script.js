@@ -1,5 +1,9 @@
 window.onload = function() {
 
+    function getAccentColor() {
+        return getComputedStyle(document.body).getPropertyValue('--accent').trim();
+    }
+
     const themeBtn = document.getElementById("themeToggle");
 
     const themes = ["dark", "gold", "light"];
@@ -31,11 +35,11 @@ window.onload = function() {
 
     function updateButtonText(theme) {
         if (theme === "dark") {
-            themeBtn.textContent = "🌙 Dark";
+            themeBtn.textContent = "Dark";
         } else if (theme === "gold") {
-            themeBtn.textContent = "⭐ Gold";
+            themeBtn.textContent = "Gold";
         } else {
-            themeBtn.textContent = "☀️ Light";
+            themeBtn.textContent = "Light";
         }
     }
 
@@ -138,6 +142,7 @@ window.onload = function() {
     const canvas = this.document.getElementById('cinamatic-canvas');
     const ctx = canvas.getContext('2d')
     let particlesArray = [];
+    
 
     function resize() {
         canvas.width= window.innerWidth;
@@ -154,7 +159,7 @@ window.onload = function() {
                 y: Math.random() * canvas.height,
                 moveX: (Math.random() - 0.5) * 2,
                 moveY: (Math.random() - 0.5) * 2,
-                size: 2
+                size: 4
             };
             particlesArray.push(particle)
         }
@@ -176,7 +181,7 @@ window.onload = function() {
                 p.moveY = p.moveY * -1;
             }
 
-            ctx.fillStyle ='#DBA506';
+            ctx.fillStyle =getAccentColor() + "CC";
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI *2);
             ctx.fill();
@@ -184,6 +189,7 @@ window.onload = function() {
     }
 
     function animate() {
+        ctx.fillStyle = "rgba(0,0,0,0.2)";
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         handleParticles();
         requestAnimationFrame(animate);
