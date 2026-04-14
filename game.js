@@ -4,6 +4,10 @@ popcornImg.src = 'popcorn.png';
 const bucketImg = new Image();
 bucketImg.src = 'bucket.png';
 
+const catchSound = new Audio("pop.mp3");
+const failSound = new Audio("fail.mp3");
+const gameOverSound = new Audio("gameover.mp3");
+
 bucketImg.onload = () => gameLayer.draw();
 popcornImg.onload = () => gameLayer.draw();
 
@@ -205,17 +209,21 @@ const anim = new Konva.Animation((frame) => {
     if (Konva.Util.haveIntersection(itemRect, playerRect)) {
         score++;
         scoreLabel.text("Popcorn: " + score);
+        catchSound.currentTime = 0;
+        catchSound.play();
         gravity += 0.005;
         velocityY += 0.2;
         resetItem();
     }
 
     if (item.y() + item.height() > stage.height()) {
-        
+        failSound.currentTime = 0;
+        failSound.play();
         lives--;
         livesLabel.text("Lives: " + lives);
             
         if (lives <= 0) {
+            gameOverSound.play();
             anim.stop();
             gameOverText.visible(true);
             item.visible(false);
