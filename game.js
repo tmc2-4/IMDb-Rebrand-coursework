@@ -8,6 +8,8 @@ const catchSound = new Audio("pop.mp3");
 const failSound = new Audio("fail.mp3");
 const gameOverSound = new Audio("gameover.mp3");
 
+const restartBtn = document.getElementById("restartBtn");
+
 bucketImg.onload = () => gameLayer.draw();
 popcornImg.onload = () => gameLayer.draw();
 
@@ -118,6 +120,7 @@ function startGame() {
     lives = 3;
     gravity = 0.08;
     velocityY = 1;
+    restartBtn.style.display = "none";
     scoreLabel.text("Popcorn: 0");
     livesLabel.text("Lives: 3");
 
@@ -228,6 +231,7 @@ const anim = new Konva.Animation((frame) => {
             gameOverText.visible(true);
             item.visible(false);
             gameRunning = false;
+            restartBtn.style.display = "inline-block";
 
             if (score > highScore) {
                 highScore = score;
@@ -246,3 +250,8 @@ const anim = new Konva.Animation((frame) => {
 }, gameLayer);
 
 gameLayer.draw();
+
+restartBtn.addEventListener("click", () => {
+    restartBtn.style.display = "none";
+    startGame();
+});

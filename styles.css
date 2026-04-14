@@ -654,3 +654,32 @@ body{
     filter: drop-shadow(0 0 10px #ff3e3e);
 }
 
+.gameWrapper{
+    position: relative;
+    width: 600px;
+    margin: 0 auto;
+}
+
+#restartBtn {
+    display: none;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+
+#restartBtn:hover {
+    background: var(--text-primary);
+    color: var(--bg-main);
+    transform: translate(-50%, -50%);
+}
