@@ -31,11 +31,11 @@ window.onload = function() {
 
     function updateButtonText(theme) {
         if (theme === "dark") {
-            themeBtn.textContent = "Dark";
+            themeBtn.textContent = "🌙 Dark";
         } else if (theme === "gold") {
-            themeBtn.textContent = "Gold";
+            themeBtn.textContent = "⭐ Gold";
         } else {
-            themeBtn.textContent = "Light";
+            themeBtn.textContent = "☀️ Light";
         }
     }
 

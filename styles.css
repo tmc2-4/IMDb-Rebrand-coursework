@@ -5,6 +5,8 @@
     --accent: #DBA506;
     --card-bg: #1a1a1a;
     --border-color: #333;
+    --hero-bg-1: #1a1a1a;
+    --hero-bg-2: #000000;
 }
 
 body.gold-theme {
@@ -14,6 +16,8 @@ body.gold-theme {
     --accent: #FFD700;
     --card-bg: #3a2f12;
     --border-color: #8a6d1a;
+    --hero-bg-1: #3a2f12;
+    --hero-bg-2: #1a1405;
 }
 
 body.light-theme{
@@ -23,6 +27,8 @@ body.light-theme{
     --accent: #DBA506;
     --card-bg: #ffffff;
     --border-color: #ccc;
+    --hero-bg-1: #eaeaea;
+    --hero-bg-2: #cccccc;
 }
 
 
@@ -80,6 +86,24 @@ main{
     padding-left: 10px;
 }
 
+#themeToggle {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#themeToggle:hover {
+    transform: scale(1.05);
+    background: var(--text-primary);
+    color: var(--bg-main);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
 body{
     background-color: var(--bg-main);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -90,7 +114,7 @@ body{
 .cinamaticContainer {
     position: relative;
     height: 70vh;
-    background: radial-gradient(circle at 20%, #1a1a1a 0%, #000000 100%);
+    background: radial-gradient(circle at 20%, var(--hero-bg-1) 0%, var(--hero-bg-2) 100%);
     display: flex;
     overflow: hidden;
 }
@@ -133,6 +157,11 @@ body{
     align-items: center;
     width: 100%;
     padding:  0 5%;
+}
+
+.cinamaticText h1,
+.cinamaticText p {
+    color: var(--text-primary);
 }
 
 .cinamaticImage img {
@@ -191,7 +220,7 @@ body{
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
     z-index: 10;
 }
 
@@ -487,7 +516,7 @@ body{
 }
 
 .pageFooter {
-    background-color: #121212;
+    background-color: var(--bg-main);
     padding: 30px 5% 15px;
     border-top: 1px solid var(--border-color);
     margin-top: 40px;
@@ -552,11 +581,11 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1a1a1a;
+    background-color: var(--card-bg);
     padding: 10px 15px;
     margin-bottom: 8px;
     border-radius: 5px;
-    border-left: 3px solid #DBA506;
+    border-left: 3px solid var(--accent);
 }
 
 .watchlist-item button {
