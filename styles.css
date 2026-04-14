@@ -289,34 +289,6 @@ body{
     color: var(--accent);
 }
 
-.particleControls {
-    position: absolute;
-    left: 5%;
-    bottom: 20px;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 14px 16px;
-    background: rgba(0,0,0,0.3);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    backdrop-filter: blur(6px);
-    color: var(--text-primary);
-    width: 220px;
-}
-
-.particleControls label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.particleControls input[type="range"] {
-    width: 100%;
-    accent-color: var(--accent);
-}
-
 .trailerBtn {
     display: inline-block;
     background-color: var(--accent);

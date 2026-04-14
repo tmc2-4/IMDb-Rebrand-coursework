@@ -16,11 +16,18 @@ const stage = new Konva.Stage({
 const gameLayer = new Konva.Layer();
 stage.add(gameLayer);
 
+stage.container().tabIndex = 1;
+stage.container().focus();
+
 let score = 0;
 let lives = 3;
 let gravity = 0.08;
 let velocityY = 1;
-let velocityX= 0
+let velocityX= 0;
+let playerSpeed = 8;
+let moveLeft = false;
+let moveRight = false;
+let controlMode = 'mouse';
 let gameRunning = false;
 
 let highScore = localStorage.getItem('popcornBest') || 0;
@@ -120,9 +127,37 @@ function startGame() {
     gameRunning = true;
 }
 
+
 stage.on('click tap', () => {
     if (!gameRunning) {
         startGame();
+    }
+    stage.container().focus();
+});
+
+stage.on('mousemove touchmove', () => {
+    controlMode = 'mouse';
+});
+
+stage.container().addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft'){
+        moveLeft = true;
+        controlMode = 'keyboard';
+        e.preventDefault();
+    } else if (e.key === 'ArrowRight') {
+        moveRight = true;
+        controlMode = 'keyboard';
+        e.preventDefault();
+    }
+});
+
+stage.container().addEventListener('keyup', (e) => {
+    if (e.key === 'ArrowLeft') {
+        moveLeft = false;
+        e.preventDefault();
+    } else if (e.key === 'ArrowRight') {
+        moveRight = false;
+        e.preventDefault();
     }
 });
 
@@ -140,10 +175,29 @@ const anim = new Konva.Animation((frame) => {
         item.x(stage.width() - item.width());
     }
     
-    const mousePos = stage.getPointerPosition();
-    if (mousePos) {
-        player.x(mousePos.x - player.width() / 2);
+    if (controlMode === 'keyboard') {
+        if (moveLeft) {
+            player.x(player.x() - playerSpeed);
+        }
+        if (moveRight) {
+            player.x(player.x() + playerSpeed);
+        }
+    } else {
+        const mousePos = stage.getPointerPosition();
+        if (mousePos) {
+            player.x(mousePos.x - player.width() / 2);
+        }
     }
+    
+
+
+    if (player.x() < 0) {
+        player.x(0);
+    } else if (player.x() > stage.width() - player.width()) {
+        player.x(stage.width() - player.width());
+    }
+
+
 
     const itemRect = item.getClientRect();
     const playerRect = player.getClientRect();
