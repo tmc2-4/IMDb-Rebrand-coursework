@@ -683,3 +683,27 @@ body{
     color: var(--bg-main);
     transform: translate(-50%, -50%);
 }
+
+.gameControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    color: var(--text-primary)
+}
+
+.gameControls label {
+    font-weight: bold;
+    color: var(--accent);
+}
+
+#difficultySelect {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 1rem;
+    cursor: pointer;
+}

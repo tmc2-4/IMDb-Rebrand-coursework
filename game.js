@@ -9,6 +9,7 @@ const failSound = new Audio("fail.mp3");
 const gameOverSound = new Audio("gameover.mp3");
 
 const restartBtn = document.getElementById("restartBtn");
+const difficultySelect = document.getElementById("difficultySelect");
 
 bucketImg.onload = () => gameLayer.draw();
 popcornImg.onload = () => gameLayer.draw();
@@ -35,6 +36,7 @@ let moveLeft = false;
 let moveRight = false;
 let controlMode = 'mouse';
 let gameRunning = false;
+let difficulty = "medium";
 
 let highScore = localStorage.getItem('popcornBest') || 0;
 
@@ -112,17 +114,31 @@ function resetItem() {
     item.x(Math.random() * (stage.width() - 40) + 20);
     velocityY = Math.random() * 1.0 + 0.5;
     velocityX = 0;
-    gravity = Math.random() * 0.1 + 0.05;
 }
 
 function startGame() {
     score = 0;
-    lives = 3;
-    gravity = 0.08;
-    velocityY = 1;
+    velocityX = 0;
     restartBtn.style.display = "none";
+
+    if (difficulty === "easy") {
+        lives = 5;
+        gravity = 0.05;
+        playerSpeed = 10;
+    } else if (difficulty === "medium") {
+        lives = 3;
+        gravity = 0.08;
+        playerSpeed = 8;
+    } else if (difficulty === "hard") {
+        lives = 2;
+        gravity = 0.12;
+        playerSpeed = 6;
+    }
+    
+    velocityY = 1;
+    
     scoreLabel.text("Popcorn: 0");
-    livesLabel.text("Lives: 3");
+    livesLabel.text("Lives" + lives);
 
     startText.visible(false);
     gameOverText.visible(false);
@@ -144,6 +160,10 @@ stage.on('click tap', () => {
 
 stage.on('mousemove touchmove', () => {
     controlMode = 'mouse';
+});
+
+difficultySelect.addEventListener("change", (e) => {
+    difficulty = e.target.value;
 });
 
 stage.container().addEventListener('keydown', (e) => {
@@ -223,7 +243,7 @@ const anim = new Konva.Animation((frame) => {
         failSound.currentTime = 0;
         failSound.play();
         lives--;
-        livesLabel.text("Lives: " + lives);
+        livesLabel.text("Lives:  " +  lives);
             
         if (lives <= 0) {
             gameOverSound.play();
