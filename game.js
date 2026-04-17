@@ -138,7 +138,7 @@ function startGame() {
     velocityY = 1;
     
     scoreLabel.text("Popcorn: 0");
-    livesLabel.text("Lives" + lives);
+    livesLabel.text("Lives: " + lives);
 
     startText.visible(false);
     gameOverText.visible(false);
@@ -162,9 +162,11 @@ stage.on('mousemove touchmove', () => {
     controlMode = 'mouse';
 });
 
-difficultySelect.addEventListener("change", (e) => {
-    difficulty = e.target.value;
-});
+if (difficultySelect) {
+    difficultySelect.addEventListener("change", (e) => {
+        difficulty = e.target.value;
+    });
+}
 
 stage.container().addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft'){
@@ -243,7 +245,7 @@ const anim = new Konva.Animation((frame) => {
         failSound.currentTime = 0;
         failSound.play();
         lives--;
-        livesLabel.text("Lives:  " +  lives);
+        livesLabel.text("Lives: " + lives);
             
         if (lives <= 0) {
             gameOverSound.play();
